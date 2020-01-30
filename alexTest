@@ -1,0 +1,60 @@
+//
+//  SPARKTutorial.swift
+//  SPARK
+//
+//  Created by  on 1/30/20.
+//  Copyright © 2020 University of Kentucky. All rights reserved.
+//
+
+import Foundation
+
+
+class SPARKTutorial {
+    
+    //Path to find tutorial file
+    var TutorialURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    var TutorialHandle: FileHandle = FileHandle.init()
+    
+    //Maybe we don't need this
+    func findFile(file: String){
+        //Select file from FileManager
+        //Figure out the directories?
+        do{
+            let DocDirURL = try FileManager.default.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: false
+            )
+            let fileURL = DocDirURL.appendingPathComponent(file).appendingPathExtension("spark")
+            //If the file is located, then update the class's path
+            self.TutorialURL = fileURL
+        } catch {
+            print("Unable to locate file: '\(file)' ")
+        }
+    }
+    
+    func setHandleRead(){
+        do {
+            self.TutorialHandle = try FileHandle.init(forReadingFrom: self.TutorialURL)
+        } catch {
+            print("Unable to handle file at: '\(self.TutorialURL)' ")
+        }
+    }
+    
+    
+    func setUp() {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+
+    func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+
+    func testExample() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+
+
+}
